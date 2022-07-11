@@ -358,11 +358,11 @@ def generate(hex_file,
             raise click.UsageError('--application-version or --application-version-string'
                                    ' required with application image.')
 
-    if (no_backup is not None) and (backup_address is not None):
-        raise click.BadParameter("Bootloader DFU settings backup page cannot be specified if backup is disabled.", param_hint='backup_address')
-
     if no_backup is None:
         no_backup = False
+
+    if (no_backup is True) and (backup_address is not None):
+        raise click.BadParameter("Bootloader DFU settings backup page cannot be specified if backup is disabled.", param_hint='backup_address')
 
     if no_backup is False:
         display_settings_backup_warning()
